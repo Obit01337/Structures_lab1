@@ -1,0 +1,3 @@
+C:/Structures_lab1/cmake-build-debug/CMakeFiles/Structures_lab1.dir
+C:/Structures_lab1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Structures_lab1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
