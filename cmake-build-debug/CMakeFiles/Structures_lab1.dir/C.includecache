@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/sikor/Documents/Structures_lab1/functions.h
+C:/Structures_lab1/Structures_lab1/functions.h
 
-C:/Users/sikor/Documents/Structures_lab1/functionsRealisation.c
+C:/Structures_lab1/Structures_lab1/functionsRealisation.c
 stdio.h
 -
 stdlib.h
@@ -16,5 +16,5 @@ stdlib.h
 stdbool.h
 -
 functions.h
-C:/Users/sikor/Documents/Structures_lab1/functions.h
+C:/Structures_lab1/Structures_lab1/functions.h
 

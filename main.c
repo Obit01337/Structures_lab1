@@ -7,16 +7,16 @@
 
 int main(void)
 {
-    struct customersInfo info;
-    info.customers = NULL;
-    info.amount = 0;
+    struct customersInfo database;
+    database.customers = NULL;
+    database.amount = 0;
     do
     {
         system("cls");
         switch (menu())
         {
             case '1':
-                info = addCustomer(info);
+                database = addCustomer(database);
                 break;
             case '2':
                 break;
