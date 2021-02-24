@@ -2,7 +2,7 @@ char menu(void);
 char checkOption(void);
 struct customersInfo addCustomer(struct customersInfo info);
 int checkUnsigned(void);
-
+char* nameInput();
 
 struct customer
 {

@@ -69,7 +69,11 @@ struct customersInfo addCustomer(struct customersInfo info)
     }
     for (i; i < amount; ++i)
     {
-
+        do
+        {
+            system("cls");
+            printf("Enter lastname for customer %i:\n>", i + 1);
+        } while (!(info.customers->lastName = nameInput()));
     }
     return info;
 }
@@ -89,6 +93,32 @@ int checkUnsigned()
     return num;
 }
 
+char* nameInput()
+{
+    char c;
+    char *string = NULL, *temp;
+    int i;
+    for (i = 0; (c = getchar()) != '\n'; ++i)
+    {
+        if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z'))
+        {
+            puts("Use only letters!\r");
+            system("pause>0");
+            rewind(stdin);
+            i--;
+            continue;
+        }
+        if(!(temp = (char*)realloc(string, i + 2)))
+        {
+            puts("Not enough memory!");
+            return NULL;
+        }
+        string = temp;
+        string[i] = c;
+    }
+    string[i] = '\0';
+    return string;
+}
 
 
 
