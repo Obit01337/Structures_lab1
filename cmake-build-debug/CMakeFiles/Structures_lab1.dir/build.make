@@ -53,19 +53,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Structures_lab1
+CMAKE_SOURCE_DIR = C:\Users\sikor\Documents\Structures_lab1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Structures_lab1\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Structures_lab1.dir/depend.make
@@ -78,29 +78,29 @@ include CMakeFiles/Structures_lab1.dir/flags.make
 
 CMakeFiles/Structures_lab1.dir/main.c.obj: CMakeFiles/Structures_lab1.dir/flags.make
 CMakeFiles/Structures_lab1.dir/main.c.obj: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Structures_lab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Structures_lab1.dir/main.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Structures_lab1.dir\main.c.obj   -c C:\Structures_lab1\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Structures_lab1.dir/main.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Structures_lab1.dir\main.c.obj   -c C:\Users\sikor\Documents\Structures_lab1\main.c
 
 CMakeFiles/Structures_lab1.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Structures_lab1.dir/main.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Structures_lab1\main.c > CMakeFiles\Structures_lab1.dir\main.c.i
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\sikor\Documents\Structures_lab1\main.c > CMakeFiles\Structures_lab1.dir\main.c.i
 
 CMakeFiles/Structures_lab1.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Structures_lab1.dir/main.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Structures_lab1\main.c -o CMakeFiles\Structures_lab1.dir\main.c.s
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\sikor\Documents\Structures_lab1\main.c -o CMakeFiles\Structures_lab1.dir\main.c.s
 
 CMakeFiles/Structures_lab1.dir/functionsRealisation.c.obj: CMakeFiles/Structures_lab1.dir/flags.make
 CMakeFiles/Structures_lab1.dir/functionsRealisation.c.obj: ../functionsRealisation.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Structures_lab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Structures_lab1.dir/functionsRealisation.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Structures_lab1.dir\functionsRealisation.c.obj   -c C:\Structures_lab1\functionsRealisation.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Structures_lab1.dir/functionsRealisation.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Structures_lab1.dir\functionsRealisation.c.obj   -c C:\Users\sikor\Documents\Structures_lab1\functionsRealisation.c
 
 CMakeFiles/Structures_lab1.dir/functionsRealisation.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Structures_lab1.dir/functionsRealisation.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Structures_lab1\functionsRealisation.c > CMakeFiles\Structures_lab1.dir\functionsRealisation.c.i
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\sikor\Documents\Structures_lab1\functionsRealisation.c > CMakeFiles\Structures_lab1.dir\functionsRealisation.c.i
 
 CMakeFiles/Structures_lab1.dir/functionsRealisation.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Structures_lab1.dir/functionsRealisation.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Structures_lab1\functionsRealisation.c -o CMakeFiles\Structures_lab1.dir\functionsRealisation.c.s
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\sikor\Documents\Structures_lab1\functionsRealisation.c -o CMakeFiles\Structures_lab1.dir\functionsRealisation.c.s
 
 # Object files for target Structures_lab1
 Structures_lab1_OBJECTS = \
@@ -116,7 +116,7 @@ Structures_lab1.exe: CMakeFiles/Structures_lab1.dir/build.make
 Structures_lab1.exe: CMakeFiles/Structures_lab1.dir/linklibs.rsp
 Structures_lab1.exe: CMakeFiles/Structures_lab1.dir/objects1.rsp
 Structures_lab1.exe: CMakeFiles/Structures_lab1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Structures_lab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable Structures_lab1.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable Structures_lab1.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Structures_lab1.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -129,6 +129,6 @@ CMakeFiles/Structures_lab1.dir/clean:
 .PHONY : CMakeFiles/Structures_lab1.dir/clean
 
 CMakeFiles/Structures_lab1.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Structures_lab1 C:\Structures_lab1 C:\Structures_lab1\cmake-build-debug C:\Structures_lab1\cmake-build-debug C:\Structures_lab1\cmake-build-debug\CMakeFiles\Structures_lab1.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\sikor\Documents\Structures_lab1 C:\Users\sikor\Documents\Structures_lab1 C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug C:\Users\sikor\Documents\Structures_lab1\cmake-build-debug\CMakeFiles\Structures_lab1.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Structures_lab1.dir/depend
 

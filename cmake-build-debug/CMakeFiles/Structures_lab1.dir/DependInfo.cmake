@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Structures_lab1/functionsRealisation.c" "C:/Structures_lab1/cmake-build-debug/CMakeFiles/Structures_lab1.dir/functionsRealisation.c.obj"
-  "C:/Structures_lab1/main.c" "C:/Structures_lab1/cmake-build-debug/CMakeFiles/Structures_lab1.dir/main.c.obj"
+  "C:/Users/sikor/Documents/Structures_lab1/functionsRealisation.c" "C:/Users/sikor/Documents/Structures_lab1/cmake-build-debug/CMakeFiles/Structures_lab1.dir/functionsRealisation.c.obj"
+  "C:/Users/sikor/Documents/Structures_lab1/main.c" "C:/Users/sikor/Documents/Structures_lab1/cmake-build-debug/CMakeFiles/Structures_lab1.dir/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

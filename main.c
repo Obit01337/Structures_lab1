@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "functions.h"
 
 
 int main(void)
 {
-    struct customer *customers = NULL;
+    struct customersInfo info;
+    info.customers = NULL;
+    info.amount = 0;
     do
     {
         system("cls");
         switch (menu())
         {
             case '1':
-                addCustomer(customers);
+                info = addCustomer(info);
                 break;
             case '2':
                 break;

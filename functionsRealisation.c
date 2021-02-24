@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "functions.h"
 
@@ -38,7 +39,7 @@ char checkOption(void)
 
 //Add customer information
 
-struct customer* addCustomer(struct customer *customers)
+struct customersInfo addCustomer(struct customersInfo info)
 {
     static unsigned amount;
     static int i;
@@ -50,19 +51,27 @@ struct customer* addCustomer(struct customer *customers)
         puts("<0)\tBack to menu>");
     } while ((numCustomers = checkUnsigned()) < 0);
     if (numCustomers == 0)
-        return customers;
-    amount += numCustomers;
-    struct customer temp;
-    //убрать функцию реаллок
-    if (!(temp = checkRealloc(customers, amount)))
     {
-        puts("Not enough memory, try again!");
+        return info;
+    }
+    amount += numCustomers;
+    struct customer *temp;
+    if (!(temp = (struct customer*)realloc(info.customers, amount * sizeof(struct customer))))
+    {
+        puts("Not enough memory to add new customers!");
+        system("pause>0");
+        return info;
+    }
+    else
+    {
+        info.customers = temp;
+        info.amount = amount;
     }
     for (i; i < amount; ++i)
     {
 
     }
-    return customers;
+    return info;
 }
 
 int checkUnsigned()
@@ -80,11 +89,6 @@ int checkUnsigned()
     return num;
 }
 
-struct customer* checkRealloc(struct customer *ptr, size_t size)
-{
-    struct customer *temp;
-    temp = (struct customer*)realloc(ptr,size * sizeof(struct customer));
-}
 
 
 

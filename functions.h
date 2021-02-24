@@ -1,8 +1,7 @@
 char menu(void);
 char checkOption(void);
-struct customer* addCustomer(struct customer *customers);
+struct customersInfo addCustomer(struct customersInfo info);
 int checkUnsigned(void);
-struct customer* checkRealloc(struct customer *ptr, size_t size);
 
 
 struct customer
@@ -13,4 +12,10 @@ struct customer
     char *address;
     char *phoneNumber;
     char *cardNumber;
+};
+
+struct customersInfo
+{
+    struct customer *customers;
+    unsigned amount;
 };
