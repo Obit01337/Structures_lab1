@@ -2,16 +2,21 @@
 char menu(void);
 char getOption(void);
 
-struct customersInfo addCustomer(struct customersInfo database);
+struct customersInfo addCustomers(struct customersInfo database);
 int getUnsigned(void);
 char* getStringLetters(void);
 char* getStringDigits(size_t size);
 
+
+void showCustomers(struct customersInfo database);
+void printSpaces(size_t steps);
+
+
 struct address
 {
     char *street;
-    unsigned homeNumber;
-    unsigned flatNumber;
+    unsigned homeNumber;// 3
+    unsigned flatNumber;// 3
 };
 struct customer
 {
@@ -19,8 +24,8 @@ struct customer
     char *name;
     char *patronymic;
     struct address address;
-    char *phoneNumber;
-    char *cardNumber;
+    char *phoneNumber;// 7
+    char *cardNumber;// 16
 };
 struct customersInfo
 {

@@ -16,9 +16,11 @@ int main(void)
         switch (menu())
         {
             case '1':
-                database = addCustomer(database);
+                database = addCustomers(database);
                 break;
             case '2':
+                showCustomers(database);
+                system("pause>0");
                 break;
             case '3':
                 break;
@@ -31,6 +33,16 @@ int main(void)
             case '7':
                 break;
             case '0':
+                for (unsigned i = database.amount; i >= 0; ++i)
+                {
+                        free(database.customers[i].surname);
+                        free(database.customers[i].name);
+                        free(database.customers[i].patronymic);
+                        free(database.customers[i].address.street);
+                        free(database.customers[i].phoneNumber);
+                        free(database.customers[i].cardNumber);
+                }
+                free(database.customers);
                 return 0;
             default:
                 puts("Invalid input, try again!");
