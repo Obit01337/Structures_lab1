@@ -25,7 +25,6 @@ char menu(void)
     } while (!(option = getOption('0', '7')));
     return option;
 }
-
 char getOption(char leftBorder, char rightBorder)
 {
     char option, newLine;
@@ -46,13 +45,13 @@ char getOption(char leftBorder, char rightBorder)
 struct customersInfo addCustomers(struct customersInfo database)
 {
     // Get number of new customers
-    int number;
+    unsigned number;
     do
     {
         system("cls");
         puts("How many customers do you want to add? Enter the number:");
-        puts("0)\t<Back to menu>");
-        printf(">");
+        puts("<0 - back to menu>");
+        putchar('>');
     } while ((number = getUnsigned()) < 0);
     if (number == 0)
         return database;
@@ -329,43 +328,29 @@ void printSpaces(size_t steps)
 //######################################################################################################################
 void changeCustomerInformation(struct customersInfo database)
 {
-    system("cls");
-    if (database.amount == 0)
-    {
-        puts("There is no customer information in the database!");
-        system("pause>0");
+    if (amountZeroCheck(database.amount))
         return;
-    }
+
     unsigned num;
-    char option;
+
     do
     {
+        system("cls");
         do
         {
             puts("Enter the number of the user you want to change:");
             putchar('>');
-            if (database.amount < (num = getUnsigned()) || num == 0)
-            {
-                puts("There is no user with this number yet! Try again.");
-                system("pause>0");
-                system("cls");
-            }
-            else break;
-        } while (true);
+        } while (!(num = compareWithAmount(database.amount)));
 
         do
         {
             if(!changeField(database, num - 1)) break;
             system("cls");
-            do puts("continue to modify this user's information?\n<1) - yes, 0) - no>");
-            while (!(option = getOption('0', '1')));
-        } while (option == '1');
-        system("cls");
-        do puts("continue to make changes to the database?\n<1) - yes, 0) - no>");
-        while (!(option = getOption('0', '1')));
-    } while (option == '1');
-}
+        } while (continueLoop("continue to modify this user's information?\n<1) - yes, 0) - no>"));
 
+        system("cls");
+    } while (continueLoop("continue to make changes to the database?\n<1) - yes, 0) - no>"));
+}
 
 char customerMenu(void)
 {
@@ -384,7 +369,6 @@ char customerMenu(void)
     } while (!(option = getOption('0', '6')));
     return option;
 }
-
 bool changeField(struct customersInfo database, unsigned num)
 {
     system("cls");
@@ -396,7 +380,7 @@ bool changeField(struct customersInfo database, unsigned num)
             system("cls");
             printf("Enter new surname for customer %i:\n>", num + 1);
             while (!(string = getStringLetters()));
-            if (areYouSure())
+            if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].surname = string;
             else return 1;
             break;
@@ -404,7 +388,7 @@ bool changeField(struct customersInfo database, unsigned num)
             system("cls");
             printf("Enter new name for customer %i:\n>", num + 1);
             while (!(string = getStringLetters()));
-            if (areYouSure())
+            if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].name = string;
             else return 1;
             break;
@@ -412,7 +396,7 @@ bool changeField(struct customersInfo database, unsigned num)
             system("cls");
             printf("Enter new patronymic for customer %i:\n>", num + 1);
             while (!(string = getStringLetters()));
-            if (areYouSure())
+            if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].patronymic = string;
             else return 1;
             break;
@@ -427,7 +411,7 @@ bool changeField(struct customersInfo database, unsigned num)
             printf("Enter new flat number for customer %i:\n", num + 1);
             while (!(flat = getUnsigned()) || flat > 999);
 
-            if (areYouSure())
+            if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
             {
                 database.customers[num].address.street = string;
                 database.customers[num].address.homeNumber = house;
@@ -440,7 +424,7 @@ bool changeField(struct customersInfo database, unsigned num)
             system("cls");
             printf("Enter new phone number for customer %i:\n>", num + 1);
             while (!(string = getStringDigits(7)));
-            if (areYouSure())
+            if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].phoneNumber = string;
             else return 1;
             break;
@@ -448,7 +432,7 @@ bool changeField(struct customersInfo database, unsigned num)
             system("cls");
             printf("Enter new card number for customer %i:\n>", num + 1);
             while (!(string = getStringDigits(16)));
-            if (areYouSure())
+            if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].cardNumber = string;
             else return 1;
             break;
@@ -458,11 +442,114 @@ bool changeField(struct customersInfo database, unsigned num)
     return 1;
 }
 
-char areYouSure(void)
+//######################################################################################################################
+
+
+// Remove customer from data base
+//######################################################################################################################
+struct customersInfo deleteCustomers(struct customersInfo database)
 {
-    char option;
-    do puts("Are you sure?\n<1) - yes, 0) - no>");
-    while (!(option = getOption('0', '1')));
-    return option;
+    unsigned num;
+
+    do
+    {
+        if(amountZeroCheck(database.amount))
+            return database;
+        system("cls");
+        do
+        {
+            puts("Enter the number of the user you want to remove:");
+            putchar('>');
+        } while (!(num = compareWithAmount(database.amount)));
+        if (!continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
+        {
+            system("cls");
+            continue;
+        }
+
+
+        database = delete(database, num - 1);
+
+        system("cls");
+    } while (continueLoop("continue removing customers from the database?\n<1) - yes, 0) - no>"));
+    return database;
+}
+
+struct customersInfo delete(struct customersInfo database, unsigned deleteNum)
+{
+    struct customer *temp;
+
+    // Remember last struct
+    struct customer buffer = database.customers[database.amount - 1];
+
+    // If there is only 1 struct
+    if (database.amount == 1)
+    {
+        database.amount = 0;
+        freeStruct(database.customers, deleteNum);
+        free(database.customers);
+        return database;
+    }
+
+    // Reallocation check
+    if (!(temp = (struct customer*)realloc(database.customers, (database.amount - 1) * sizeof(struct customer))))
+    {
+        puts("Not enough memory!");
+        system("pause>0");
+        return database;
+    }
+    database.customers = temp;
+    database.amount--;
+
+    // If we delete last struct
+    if (database.amount == deleteNum)
+        return database;
+
+    unsigned i;
+    for (i = deleteNum; i < database.amount - 1; ++i)
+        database.customers[i] = database.customers[i + 1];
+    database.customers[i] = buffer;
+    return database;
 }
 //######################################################################################################################
+
+bool amountZeroCheck(unsigned amount)
+{
+    if (amount == 0)
+    {
+        puts("There is no customer information in the database!");
+        system("pause>0");
+        return true;
+    }
+    return false;
+}
+unsigned compareWithAmount(unsigned amount)
+{
+    unsigned num;
+    if (amount < (num = getUnsigned()) || num == 0)
+    {
+        puts("There is no such customer! Try again.");
+        system("pause>0");
+        system("cls");
+        return 0;
+    }
+    return num;
+}
+
+bool continueLoop(char *str)
+{
+    char option;
+    do puts(str);
+    while (!(option = getOption('0', '1')));
+    return (option == '1') ? true : false;
+}
+
+void freeStruct(struct customer *customers, unsigned num)
+{
+    free(customers[num].surname);
+    free(customers[num].name);
+    free(customers[num].patronymic);
+    free(customers[num].address.street);
+    free(customers[num].phoneNumber);
+    free(customers[num].cardNumber);
+}

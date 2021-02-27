@@ -29,19 +29,13 @@ int main(void)
             case '5':
                 break;
             case '6':
+                database = deleteCustomers(database);
                 break;
             case '7':
                 break;
             case '0':
                 for (unsigned i = database.amount; i >= 0; ++i)
-                {
-                        free(database.customers[i].surname);
-                        free(database.customers[i].name);
-                        free(database.customers[i].patronymic);
-                        free(database.customers[i].address.street);
-                        free(database.customers[i].phoneNumber);
-                        free(database.customers[i].cardNumber);
-                }
+                        freeStruct(database.customers, i);
                 free(database.customers);
                 return 0;
         }
