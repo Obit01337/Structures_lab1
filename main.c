@@ -20,9 +20,9 @@ int main(void)
                 break;
             case '2':
                 showCustomers(database);
-                system("pause>0");
                 break;
             case '3':
+                changeCustomerInformation(database);
                 break;
             case '4':
                 break;
@@ -44,10 +44,6 @@ int main(void)
                 }
                 free(database.customers);
                 return 0;
-            default:
-                puts("Invalid input, try again!");
-                system("pause>0");
-                break;
         }
     } while (1);
 }

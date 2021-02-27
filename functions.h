@@ -1,9 +1,9 @@
 
 char menu(void);
-char getOption(void);
+char getOption(char leftBorder, char rightBorder);
 
 struct customersInfo addCustomers(struct customersInfo database);
-int getUnsigned(void);
+unsigned getUnsigned(void);
 char* getStringLetters(void);
 char* getStringDigits(size_t size);
 
@@ -11,6 +11,9 @@ char* getStringDigits(size_t size);
 void showCustomers(struct customersInfo database);
 void printSpaces(size_t steps);
 
+void changeCustomerInformation(struct customersInfo database);
+bool changeField(struct customersInfo database, unsigned num);
+char areYouSure(void);
 
 struct address
 {

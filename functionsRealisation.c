@@ -22,14 +22,15 @@ char menu(void)
         puts("7)\t<Find customer according to the specified data (partial match using *)>");
         puts("0)\t<Exit the program>");
         printf(">");
-    } while (!(option = getOption()));
+    } while (!(option = getOption('0', '7')));
     return option;
 }
-char getOption(void)
+
+char getOption(char leftBorder, char rightBorder)
 {
     char option, newLine;
     rewind(stdin);
-    if (scanf("%c%c", &option, &newLine) != 2 || newLine != '\n')
+    if (scanf("%c%c", &option, &newLine) != 2 || newLine != '\n' || option < leftBorder || option > rightBorder)
     {
         puts("Invalid input, try again!");
         system("pause>0");
@@ -94,12 +95,12 @@ struct customersInfo addCustomers(struct customersInfo database)
         {
             system("cls");
             printf("Enter house number for customer %i:\n>", i + 1);
-        } while ((database.customers[i].address.homeNumber = getUnsigned()) < 0 || database.customers[i].address.homeNumber > 999);
+        } while (!(database.customers[i].address.homeNumber = getUnsigned()) || database.customers[i].address.homeNumber > 999);
         do
         {
             system("cls");
             printf("Enter flat number for customer %i:\n>", i + 1);
-        } while ((database.customers[i].address.flatNumber = getUnsigned()) < 0 || database.customers[i].address.flatNumber > 999);
+        } while (!(database.customers[i].address.flatNumber = getUnsigned()) || database.customers[i].address.flatNumber > 999);
         do
         {
             system("cls");
@@ -116,16 +117,16 @@ struct customersInfo addCustomers(struct customersInfo database)
     return database;
 }
 
-int getUnsigned(void)
+unsigned getUnsigned(void)
 {
-    int num;
+    unsigned num;
     char newLine;
     rewind(stdin);
-    if (scanf("%i%c", &num, &newLine) != 2 || newLine != '\n' || num < 0)
+    if (scanf("%u%c", &num, &newLine) != 2 || newLine != '\n')
     {
         puts("Invalid input, try again!");
         system("pause>0");
-        return -1;
+        return 0;
     }
     return num;
 }
@@ -203,6 +204,7 @@ void showCustomers(struct customersInfo database)
     if (database.amount == 0)
     {
         puts("There is no customer information in the database!");
+        system("pause>0");
         return;
     }
     // Determine the length of the columns
@@ -229,7 +231,7 @@ void showCustomers(struct customersInfo database)
     size_t steps;
     // Show columns
     system("cls");
-    printf("| ");
+    printf("     | ");
     printSpaces(steps = (surnameColumnLen - strlen("Surname")) / 2);
     printf("Surname");
     printSpaces(surnameColumnLen - steps - strlen("Surname") + 1);
@@ -262,10 +264,12 @@ void showCustomers(struct customersInfo database)
     printf("|\n\n");
     for (int i = 0; i < database.amount; ++i)
     {
-        size_t max = surnameColumnLen + nameColumnLen + patronymicColumnLen + addressColumnLen + phoneNumberLen + cardNumberLen + 19;
+        size_t max = surnameColumnLen + nameColumnLen + patronymicColumnLen + addressColumnLen + phoneNumberLen + cardNumberLen + 24;
         for (int j = 0; j < max; ++j)
             putchar('-');
         puts("");
+
+        printf("%5i", i + 1);
 
         printf("| ");
         printSpaces(steps = (surnameColumnLen - strlen(database.customers[i].surname)) / 2);
@@ -311,11 +315,154 @@ void showCustomers(struct customersInfo database)
 
         puts("|");
     }
+    system("pause>0");
 }
 
 void printSpaces(size_t steps)
 {
     for (int i = 0; i < steps; ++i)
         printf(" ");
+}
+//######################################################################################################################
+
+// Change customer information
+//######################################################################################################################
+void changeCustomerInformation(struct customersInfo database)
+{
+    system("cls");
+    if (database.amount == 0)
+    {
+        puts("There is no customer information in the database!");
+        system("pause>0");
+        return;
+    }
+    unsigned num;
+    char option;
+    do
+    {
+        do
+        {
+            puts("Enter the number of the user you want to change:");
+            putchar('>');
+            if (database.amount < (num = getUnsigned()) || num == 0)
+            {
+                puts("There is no user with this number yet! Try again.");
+                system("pause>0");
+                system("cls");
+            }
+            else break;
+        } while (true);
+
+        do
+        {
+            if(!changeField(database, num - 1)) break;
+            system("cls");
+            do puts("continue to modify this user's information?\n<1) - yes, 0) - no>");
+            while (!(option = getOption('0', '1')));
+        } while (option == '1');
+        system("cls");
+        do puts("continue to make changes to the database?\n<1) - yes, 0) - no>");
+        while (!(option = getOption('0', '1')));
+    } while (option == '1');
+}
+
+
+char customerMenu(void)
+{
+    char option;
+    do
+    {
+        puts("select the field to change from the list below:");
+        puts("1)\t<Surname>");
+        puts("2)\t<Name>");
+        puts("3)\t<Patronymic>");
+        puts("4)\t<Address>");
+        puts("5)\t<Phone number>");
+        puts("6)\t<Card number>");
+        puts("0)\t<Back>");
+        printf(">");
+    } while (!(option = getOption('0', '6')));
+    return option;
+}
+
+bool changeField(struct customersInfo database, unsigned num)
+{
+    system("cls");
+    char *string;
+    unsigned house, flat;
+    switch (customerMenu())
+    {
+        case '1':
+            system("cls");
+            printf("Enter new surname for customer %i:\n>", num + 1);
+            while (!(string = getStringLetters()));
+            if (areYouSure())
+                database.customers[num].surname = string;
+            else return 1;
+            break;
+        case '2':
+            system("cls");
+            printf("Enter new name for customer %i:\n>", num + 1);
+            while (!(string = getStringLetters()));
+            if (areYouSure())
+                database.customers[num].name = string;
+            else return 1;
+            break;
+        case '3':
+            system("cls");
+            printf("Enter new patronymic for customer %i:\n>", num + 1);
+            while (!(string = getStringLetters()));
+            if (areYouSure())
+                database.customers[num].patronymic = string;
+            else return 1;
+            break;
+        case '4':
+            system("cls");
+            printf("Enter new street for customer %i:\n>", num + 1);
+            while (!(string = getStringLetters()));
+
+            printf("Enter new house number for customer %i:\n>", num + 1);
+            while (!(house = getUnsigned()) || house > 999);
+
+            printf("Enter new flat number for customer %i:\n", num + 1);
+            while (!(flat = getUnsigned()) || flat > 999);
+
+            if (areYouSure())
+            {
+                database.customers[num].address.street = string;
+                database.customers[num].address.homeNumber = house;
+                database.customers[num].address.flatNumber = flat;
+            }
+            else return 1;
+
+            break;
+        case '5':
+            system("cls");
+            printf("Enter new phone number for customer %i:\n>", num + 1);
+            while (!(string = getStringDigits(7)));
+            if (areYouSure())
+                database.customers[num].phoneNumber = string;
+            else return 1;
+            break;
+        case '6':
+            system("cls");
+            printf("Enter new card number for customer %i:\n>", num + 1);
+            while (!(string = getStringDigits(16)));
+            if (areYouSure())
+                database.customers[num].cardNumber = string;
+            else return 1;
+            break;
+        case '0':
+            return 0;
+    }
+    return 1;
+}
+
+char areYouSure(void)
+{
+    char option;
+    do puts("Are you sure?\n<1) - yes, 0) - no>");
+    while (!(option = getOption('0', '1')));
+    return option;
 }
 //######################################################################################################################
