@@ -27,6 +27,7 @@ int main(void)
             case '4':
                 break;
             case '5':
+                sortCustomers(database);
                 break;
             case '6':
                 database = deleteCustomers(database);

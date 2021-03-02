@@ -345,19 +345,18 @@ void changeCustomerInformation(struct customersInfo database)
         do
         {
             if(!changeField(database, num - 1)) break;
-            system("cls");
         } while (continueLoop("continue to modify this user's information?\n<1) - yes, 0) - no>"));
 
-        system("cls");
     } while (continueLoop("continue to make changes to the database?\n<1) - yes, 0) - no>"));
 }
 
-char customerMenu(void)
+char customerMenu(char *str)
 {
     char option;
     do
     {
-        puts("select the field to change from the list below:");
+        system("cls");
+        puts(str);
         puts("1)\t<Surname>");
         puts("2)\t<Name>");
         puts("3)\t<Patronymic>");
@@ -371,10 +370,9 @@ char customerMenu(void)
 }
 bool changeField(struct customersInfo database, unsigned num)
 {
-    system("cls");
     char *string;
     unsigned house, flat;
-    switch (customerMenu())
+    switch (customerMenu("select the field to change from the list below:"))
     {
         case '1':
             system("cls");
@@ -382,7 +380,7 @@ bool changeField(struct customersInfo database, unsigned num)
             while (!(string = getStringLetters()));
             if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].surname = string;
-            else return 1;
+            else return true;
             break;
         case '2':
             system("cls");
@@ -390,7 +388,7 @@ bool changeField(struct customersInfo database, unsigned num)
             while (!(string = getStringLetters()));
             if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].name = string;
-            else return 1;
+            else return true;
             break;
         case '3':
             system("cls");
@@ -398,7 +396,7 @@ bool changeField(struct customersInfo database, unsigned num)
             while (!(string = getStringLetters()));
             if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].patronymic = string;
-            else return 1;
+            else return true;
             break;
         case '4':
             system("cls");
@@ -417,7 +415,7 @@ bool changeField(struct customersInfo database, unsigned num)
                 database.customers[num].address.homeNumber = house;
                 database.customers[num].address.flatNumber = flat;
             }
-            else return 1;
+            else return true;
 
             break;
         case '5':
@@ -426,7 +424,7 @@ bool changeField(struct customersInfo database, unsigned num)
             while (!(string = getStringDigits(7)));
             if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].phoneNumber = string;
-            else return 1;
+            else return true;
             break;
         case '6':
             system("cls");
@@ -434,12 +432,12 @@ bool changeField(struct customersInfo database, unsigned num)
             while (!(string = getStringDigits(16)));
             if (continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
                 database.customers[num].cardNumber = string;
-            else return 1;
+            else return true;
             break;
         case '0':
-            return 0;
+            return false;
     }
-    return 1;
+    return true;
 }
 
 //######################################################################################################################
@@ -453,6 +451,7 @@ struct customersInfo deleteCustomers(struct customersInfo database)
 
     do
     {
+        system("cls");
         if(amountZeroCheck(database.amount))
             return database;
         system("cls");
@@ -462,15 +461,10 @@ struct customersInfo deleteCustomers(struct customersInfo database)
             putchar('>');
         } while (!(num = compareWithAmount(database.amount)));
         if (!continueLoop("Are you sure?\n<1) - yes, 0) - no>"))
-        {
-            system("cls");
             continue;
-        }
-
 
         database = delete(database, num - 1);
 
-        system("cls");
     } while (continueLoop("continue removing customers from the database?\n<1) - yes, 0) - no>"));
     return database;
 }
@@ -512,6 +506,117 @@ struct customersInfo delete(struct customersInfo database, unsigned deleteNum)
     return database;
 }
 //######################################################################################################################
+void sortCustomers(struct customersInfo database)
+{
+    if(amountZeroCheck(database.amount))
+        return;
+
+    bool flag = continueLoop("<1 - ascending, 0 - descending>");
+
+    switch (customerMenu("select an option to sort:"))
+    {
+        case '1':
+            sortSurname(database, flag);
+            break;
+        case '2':
+            sortName(database,flag);
+            break;
+        case '3':
+            sortPatronymic(database, flag);
+            break;
+        case '4':
+            sortAddress(database, flag);
+            break;
+        case '5':
+            sortPhoneNumber(database, flag);
+            break;
+        case '6':
+            sortCardNumber(database, flag);
+            break;
+        case '0':
+            return;
+    }
+}
+
+void sortSurname(struct customersInfo database, bool flag)
+{
+    for (unsigned i = 0; i < database.amount; i++)
+        for (unsigned j = i + 1; j < database.amount; j++)
+            if ((flag && strcmp(database.customers[i].surname, database.customers[j].surname) > 0) ||
+               (!flag && strcmp(database.customers[i].surname, database.customers[j].surname) < 0))
+                swap(&database.customers[i], &database.customers[j]);
+}
+void sortName(struct customersInfo database, bool flag)
+{
+    for (unsigned i = 0; i < database.amount; i++)
+        for (unsigned j = i + 1; j < database.amount; j++)
+            if ((flag && strcmp(database.customers[i].name, database.customers[j].name) > 0) ||
+               (!flag && strcmp(database.customers[i].name, database.customers[j].name) < 0))
+                swap(&database.customers[i], &database.customers[j]);
+}
+void sortPatronymic(struct customersInfo database, bool flag)
+{
+    for (unsigned i = 0; i < database.amount; i++)
+        for (unsigned j = i + 1; j < database.amount; j++)
+            if ((flag && strcmp(database.customers[i].patronymic, database.customers[j].patronymic) > 0) ||
+               (!flag && strcmp(database.customers[i].patronymic, database.customers[j].patronymic) < 0))
+                swap(&database.customers[i], &database.customers[j]);
+}
+void sortAddress(struct customersInfo database, bool flag)
+{
+    // My Precious<3
+    for (unsigned i = 0; i < database.amount; i++)
+        for (unsigned j = i + 1; j < database.amount; j++)
+        {
+            if ((flag && strcmp(database.customers[i].address.street, database.customers[j].address.street) > 0) ||
+               (!flag && strcmp(database.customers[i].address.street, database.customers[j].address.street) < 0))
+                swap(&database.customers[i], &database.customers[j]);
+            if (!strcmp(database.customers[i].address.street, database.customers[j].address.street))
+            {
+                if ((flag && database.customers[i].address.homeNumber > database.customers[j].address.homeNumber) ||
+                   (!flag && database.customers[i].address.homeNumber < database.customers[j].address.homeNumber))
+                    swap(&database.customers[i], &database.customers[j]);
+                if (database.customers[i].address.homeNumber == database.customers[j].address.homeNumber)
+                {
+                    if (database.customers[i].address.flatNumber == database.customers[j].address.flatNumber)
+                        continue;
+                    if ((flag && database.customers[i].address.flatNumber > database.customers[j].address.flatNumber) ||
+                       (!flag && database.customers[i].address.flatNumber < database.customers[j].address.flatNumber))
+                        swap(&database.customers[i], &database.customers[j]);
+                }
+
+            }
+
+        }
+}
+
+void sortPhoneNumber(struct customersInfo database, bool flag)
+{
+    for (unsigned i = 0; i < database.amount; i++)
+        for (unsigned j = i + 1; j < database.amount; j++)
+            if ((flag && strcmp(database.customers[i].phoneNumber, database.customers[j].phoneNumber) > 0) ||
+               (!flag && strcmp(database.customers[i].phoneNumber, database.customers[j].phoneNumber) < 0))
+                swap(&database.customers[i], &database.customers[j]);
+}
+
+void sortCardNumber(struct customersInfo database, bool flag)
+{
+    for (unsigned i = 0; i < database.amount; i++)
+        for (unsigned j = i + 1; j < database.amount; j++)
+            if ((flag && strcmp(database.customers[i].cardNumber, database.customers[j].cardNumber) > 0) ||
+               (!flag && strcmp(database.customers[i].cardNumber, database.customers[j].cardNumber) < 0))
+                swap(&database.customers[i], &database.customers[j]);
+
+}
+
+//######################################################################################################################
+
+void swap(struct customer *x, struct customer *y)
+{
+    struct customer temp = *x;
+    *x = *y;
+    *y = temp;
+}
 
 bool amountZeroCheck(unsigned amount)
 {
@@ -539,6 +644,7 @@ unsigned compareWithAmount(unsigned amount)
 bool continueLoop(char *str)
 {
     char option;
+    system("cls");
     do puts(str);
     while (!(option = getOption('0', '1')));
     return (option == '1') ? true : false;

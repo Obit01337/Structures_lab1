@@ -19,6 +19,10 @@ bool changeField(struct customersInfo database, unsigned num);
 struct customersInfo deleteCustomers(struct customersInfo database);
 struct customersInfo delete(struct customersInfo database, unsigned deleteNum);
 
+void sortCustomers(struct customersInfo database);
+
+
+
 
 bool amountZeroCheck(unsigned amount);
 unsigned compareWithAmount(unsigned amount);
@@ -48,3 +52,11 @@ struct customersInfo
 };
 
 void freeStruct(struct customer *customers, unsigned num);
+void sortSurname(struct customersInfo database, bool flag);
+void sortName(struct customersInfo database, bool flag);
+void sortPatronymic(struct customersInfo database, bool flag);
+void sortAddress(struct customersInfo database, bool flag);
+void sortPhoneNumber(struct customersInfo database, bool flag);
+void sortCardNumber(struct customersInfo database, bool flag);
+
+void swap(struct customer *x, struct customer *y);
