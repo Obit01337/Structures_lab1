@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 C:/Structures_lab1/Structures_lab1/functions.h
-
-C:/Structures_lab1/Structures_lab1/functionsRealisation.c
 stdio.h
 -
 stdlib.h
@@ -17,16 +15,8 @@ string.h
 -
 stdbool.h
 -
-functions.h
-C:/Structures_lab1/Structures_lab1/functions.h
 
-C:/Structures_lab1/Structures_lab1/main.c
-stdio.h
--
-stdlib.h
--
-stdbool.h
--
+C:/Structures_lab1/Structures_lab1/functionsRealisation.c
 functions.h
 C:/Structures_lab1/Structures_lab1/functions.h
 

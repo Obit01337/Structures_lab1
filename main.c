@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 #include "functions.h"
-
 
 int main(void)
 {
@@ -25,6 +20,7 @@ int main(void)
                 changeCustomerInformation(database);
                 break;
             case '4':
+                searchCustomers(database);
                 break;
             case '5':
                 sortCustomers(database);
@@ -32,10 +28,8 @@ int main(void)
             case '6':
                 database = deleteCustomers(database);
                 break;
-            case '7':
-                break;
             case '0':
-                for (unsigned i = database.amount; i >= 0; ++i)
+                for (size_t i = database.amount; i >= 0; ++i)
                         freeStruct(database.customers, i);
                 free(database.customers);
                 return 0;
